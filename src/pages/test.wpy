@@ -1,0 +1,66 @@
+<style lang="less">
+  .test {
+    border: 1rpx solid red;
+  }
+
+  .active {
+    color: red;
+  }
+</style>
+
+
+<template>
+  <div @tap="test">{{title}}</div>
+  <div @tap="testColor" :class="{'active': isColor}">修改颜色</div>
+  <div id="outer" @tap="handleTap1">
+    outer view
+    <div id="middle" @tap.stop="handleTap2">
+      middle view
+      <div id="inner" @tap="handleTap3">
+        inner view
+      </div>
+    </div>
+  </div>
+  <world></world>
+  <testA></testA>
+  <a url="/pages/index">跳转</a>
+  <navigator url="/pages/index">拉三季度</navigator>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+
+  wepy.page({
+    // 选项
+    data: {
+      title: '那年秋天',
+      isColor: false
+    },
+    methods: {
+      test () {
+        this.title = '不知道走向左边还是右边'
+      },
+      testColor () {
+        this.isColor = !this.isColor
+      },
+      handleTap1 () {
+        console.log(1)
+      },
+      handleTap2 () {
+        console.log(2)
+      },
+      handleTap3 () {
+        console.log(3)
+      }
+    }
+  })
+</script>
+<config>
+  {
+    navigationBarTitleText: 'hello world',
+    usingComponents: {
+      world: '~@/components/world',
+      testA: '~@/components/testA'
+    }
+  }
+</config>

@@ -1,0 +1,36 @@
+<style lang="less">
+  .list {
+    padding: 10rpx;
+
+    &__item {
+      color: #161718;
+      font-size: 30rpx;
+      margin-bottom: 10rpx;
+    }
+  }
+</style>
+<template>
+  <view class="list">
+    <view class="list__item" v-for="(item, index) in ginsengList" id="item.id" @tap="test(index)">{{item.title}}</view>
+  </view>
+</template>
+<script>
+  import wepy from '@wepy/core'
+
+  wepy.component({
+    props: {
+      ginsengList: {
+        type: Array,
+        required: true,
+        default () {
+          return []
+        }
+      }
+    },
+    methods: {
+      test (index) {
+        this.$emit('testClick', index)
+      }
+    }
+  })
+</script>

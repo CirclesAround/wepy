@@ -1,0 +1,13 @@
+<style lang="less">
+
+</style>
+<template>
+  <div>我是组件world</div>
+</template>
+<script>
+  import wepy from '@wepy/core'
+
+  wepy.component({
+
+  })
+</script>
