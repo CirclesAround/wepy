@@ -11,8 +11,10 @@
 
 <script>
 import wepy from '@wepy/core'
+import vuex from '@wepy/x'
 import eventHub from './common/eventHub'
 
+wepy.use(vuex)
 wepy.app({
   hooks: {
     // App 级别 hook，对整个 App 生效
@@ -27,6 +29,13 @@ wepy.app({
   },
 
   onLaunch() {
+    const store = require('./store/index.js').default
+    const authorization = wx.getStorageSync('authorization')
+    if (authorization) {
+      store.commit('setAuthorization', authorization)
+    } else {
+      store.dispatch('getAuthorization')
+    }
     this.testAsync()
     eventHub.$on('app-launch', (...args) => {
       console.log('app-launch event emitted, the params are:')
@@ -54,9 +63,11 @@ wepy.app({
 <config>
 {
     pages: [
+      'pages/test1',
+      'pages/test',
+      'pages/recording',
       'pages/test-component',
       'pages/test-image',
-      'pages/test',
       'pages/index'
     ],
     window: {

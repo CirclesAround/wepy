@@ -23,8 +23,8 @@
   </div>
   <world></world>
   <testA></testA>
-  <a url="/pages/index">跳转</a>
-  <navigator url="/pages/index">拉三季度</navigator>
+  <navigator url="/pages/index">跳转</navigator>
+  <navigator url="/pages/test1">跳转到test1</navigator>
 </template>
 
 <script>

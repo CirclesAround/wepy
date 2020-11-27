@@ -1,0 +1,126 @@
+<style lang="less">
+
+</style>
+
+<template>
+  <view class="page">
+    <head></head>
+    <button @tap="startRecord">{{isStart === 0 ? '点击开始录音' : isStart === 1 ? '正在录音' : isStart === 2 ? '暂停录音' : isStart === 3 ? '继续录音' : '录音完成'}}</button>
+    <button @tap="playRecording" v-show="isStart === 4">播放录音</button>
+  </view>
+
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+
+  wepy.page({
+    data: {
+      recorderManager: '', // 创建录音
+      innerAudioContext: '', // 创建音频
+      isStart: 0, // 0没有开始录音，1开始录音，2暂停录音，3继续录音，4录音完成
+      option: {
+        duration: 10000,
+        frameSize: 50
+      },
+      isRecordingPlay: false
+    },
+    methods: {
+      startRecord () {
+        let that = this
+        if (that.isStart === 1) {
+          that.recorderManager.pause()
+        } else {
+          wx.getSetting({
+            success (res) { // 已授权
+              if (res.authSetting['scope.record']) {
+                that.isStart = 1
+                that.recorderManager.start(that.option)
+              } else { // 未授权
+                wx.authorize({
+                  scope: 'scope.record',
+                  success: res => { // 授权成功
+                    console.log(res)
+                  },
+                  fail: error => { // 拒绝授权
+                    wx.showModal({
+                      title: '温馨提示',
+                      content: `若点击不授权，将无法使用录音`,
+                      cancelText: '不授权',
+                      cancelColor: '#999',
+                      confirmText: '授权',
+                      confirmColor: '#00c6ff',
+                      success(res) {
+                        if (res.confirm) {
+                          wx.openSetting({ // 确定再次授权
+                            success(res) {
+                              console.log(res.authSetting)
+                            }
+                          })
+                        } else if (res.cancel) {
+                          console.log('用户点击取消')
+                        }
+                      }
+                    })
+                  }
+                })
+              }
+            }
+          })
+        }
+      },
+      playRecording () {
+        if (this.isRecordingPlay) {
+          this.isRecordingPlay = false
+          this.innerAudioContext.pause()
+        } else {
+          this.isRecordingPlay = true
+          this.innerAudioContext.play()
+        }
+      }
+    },
+    onLoad () {
+      this.recorderManager = wx.getRecorderManager()
+
+      this.innerAudioContext = wx.createInnerAudioContext()
+
+      // 监听录音暂停事件
+      this.recorderManager.onPause(() => {
+        this.isStart = 3
+      })
+
+      // 监听录音继续录制
+      this.recorderManager.onResume(res => {
+        this.isStart = 3
+        console.log(res + 'resume')
+      })
+
+      // 监听录音结束事件
+      this.recorderManager.onStop(res => {
+        this.isStart = 4
+        console.log(res)
+        this.innerAudioContext.src = res.tempFilePath
+      })
+
+      // 监听录音完成指定帧大小文件事件
+      this.recorderManager.onFrameRecorded(res => {
+        const { frameBuffer } = res
+        console.log('frameBuffer.byteLength', frameBuffer.byteLength)
+      })
+
+      this.innerAudioContext.onPlay(() => {
+        console.log('播放录音')
+      })
+    }
+  })
+</script>
+
+<config>
+  {
+    navigationBarTitleText: '录音',
+    navigationStyle: 'custom',
+    usingComponents: {
+      head: '~@/components/test-head'
+    }
+  }
+</config>
