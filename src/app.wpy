@@ -63,6 +63,7 @@ wepy.app({
 <config>
 {
     pages: [
+      'pages/mainPackage',
       'pages/recording',
       'pages/test1',
       'pages/test',
@@ -70,6 +71,21 @@ wepy.app({
       'pages/test-image',
       'pages/index'
     ],
+    subPackages: [
+      {
+        root: 'packageA',
+        name: 'testSubcontract',
+        pages: [
+          'subcontract'
+        ]
+      }
+    ],
+    preloadRule: {
+      'pages/recording': {
+        network: 'all',
+        packages: ['testSubcontract']
+      }
+    },
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',

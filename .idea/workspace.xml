@@ -20,10 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf85250f-0a4c-4804-975f-69106d6c0c60" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/packageA/subcontract.wpy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/mainPackage.wpy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.wpy" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.wpy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/recording.wpy" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/recording.wpy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +35,7 @@
       <list>
         <option value="Vue Single File Component" />
         <option value="JavaScript File" />
+        <option value="vue File" />
       </list>
     </option>
   </component>
@@ -78,15 +79,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\myprojectMini\src\style" />
-      <recent name="D:\myprojectMini\src\pages" />
-      <recent name="D:\myprojectMini\src\components" />
-      <recent name="D:\myprojectMini\src\pages\example" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\myprojectMini\src\common" />
       <recent name="D:\myprojectMini\src\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\myprojectMini\src\pages" />
+      <recent name="D:\myprojectMini\src\style" />
+      <recent name="D:\myprojectMini\src\components" />
+      <recent name="D:\myprojectMini\src\pages\example" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -120,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606456255135</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: 音频合成dome">
+      <created>1606784175523</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606784175523</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,17 +148,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: 添加公共部分和接口请求封装" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 添加公共部分和接口请求封装" />
+    <MESSAGE value="feat: 音频合成dome" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 音频合成dome" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="927" y="81" key="CommitChangelistDialog2" timestamp="1606456250723">
+    <state x="927" y="81" key="CommitChangelistDialog2" timestamp="1606784174093">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="927" y="81" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606456250723" />
-    <state x="368" y="85" key="DiffContextDialog" timestamp="1606456024111">
+    <state x="927" y="81" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606784174093" />
+    <state x="368" y="85" key="DiffContextDialog" timestamp="1606784135651">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="368" y="85" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606456024111" />
+    <state x="368" y="85" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606784135651" />
     <state x="1073" y="271" key="FileChooserDialogImpl" timestamp="1606705464540">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -159,17 +168,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="414" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1606707572158" />
-    <state x="921" y="252" key="Vcs.Push.Dialog.v2" timestamp="1606456257519">
+    <state x="921" y="252" key="Vcs.Push.Dialog.v2" timestamp="1606784178453">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="921" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606456257519" />
+    <state x="921" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606784178453" />
     <state x="1031" y="223" width="596" height="594" key="find.popup" timestamp="1606445788670">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1031" y="223" width="596" height="594" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606445788670" />
-    <state x="992" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1606441817950">
+    <state x="992" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1606785950625">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="992" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606441817950" />
+    <state x="992" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606785950625" />
   </component>
 </project>

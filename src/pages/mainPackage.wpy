@@ -1,0 +1,39 @@
+<style lang="less">
+  .btn {
+    color: #333;
+    font-size: 30rpx;
+
+    &::after {
+      display: none;
+    }
+  }
+</style>
+
+<template>
+  <button class="btn" type="button" @tap="jumpSubcontract">主包页面跳转到分包页面</button>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+  wepy.page({
+    data: {
+
+    },
+    methods: {
+      jumpSubcontract () {
+        wx.navigateTo({
+          url: '/packageA/subcontract'
+        })
+      }
+    },
+    onLoad() {
+
+    }
+  })
+</script>
+
+<config>
+  {
+    navigationBarTitleText: '主包页面'
+  }
+</config>

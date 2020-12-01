@@ -1,0 +1,38 @@
+<style lang="less">
+  .test {
+    color: #fff;
+    font-size: 28rpx;
+    padding: 10rpx;
+    width: 600rpx;
+    text-align: center;
+    line-height: 60rpx;
+    margin: auto;
+    background-color: #00c6ff;
+  }
+</style>
+<template>
+  <view class="test" @tap="testClick">{{testText}}</view>
+</template>
+<script>
+  import wepy from '@wepy/core'
+  wepy.page({
+    data: {
+      testText: '分包跳转到主包页面'
+    },
+    methods: {
+      testClick () {
+        wx.redirectTo({
+          url: '/pages/recording'
+        })
+      }
+    },
+    onLoad () {
+      console.log('进入分包页面')
+    }
+  })
+</script>
+<config>
+  {
+    navigationBarTitleText: '测试分包页面'
+  }
+</config>
