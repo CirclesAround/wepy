@@ -63,9 +63,9 @@ wepy.app({
 <config>
 {
     pages: [
+      'pages/recording',
       'pages/test1',
       'pages/test',
-      'pages/recording',
       'pages/test-component',
       'pages/test-image',
       'pages/index'

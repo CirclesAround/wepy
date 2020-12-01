@@ -20,21 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf85250f-0a4c-4804-975f-69106d6c0c60" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/common/request.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/services.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/test-head.wpy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/recording.wpy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/test1.wpy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/style/editor.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.wpy" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.wpy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/test.wpy" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/test.wpy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wepy.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/wepy.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/recording.wpy" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/recording.wpy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +65,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../system/mini-abz" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../system/lianmai" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -121,8 +110,17 @@
       <workItem from="1591093357499" duration="1113000" />
       <workItem from="1591233452409" duration="212000" />
       <workItem from="1593741180107" duration="20000" />
-      <workItem from="1606438516652" duration="8296000" />
+      <workItem from="1606438516652" duration="17360000" />
+      <workItem from="1606702435947" duration="18833000" />
     </task>
+    <task id="LOCAL-00001" summary="feat: 添加公共部分和接口请求封装">
+      <created>1606456255135</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1606456255135</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,20 +136,33 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: 添加公共部分和接口请求封装" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 添加公共部分和接口请求封装" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="927" y="81" key="CommitChangelistDialog2" timestamp="1606456025363">
+    <state x="927" y="81" key="CommitChangelistDialog2" timestamp="1606456250723">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="927" y="81" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606456025363" />
+    <state x="927" y="81" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606456250723" />
     <state x="368" y="85" key="DiffContextDialog" timestamp="1606456024111">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="368" y="85" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606456024111" />
-    <state x="1073" y="271" key="FileChooserDialogImpl" timestamp="1606438730250">
+    <state x="1073" y="271" key="FileChooserDialogImpl" timestamp="1606705464540">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1073" y="271" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1606438730250" />
+    <state x="1073" y="271" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1606705464540" />
+    <state width="414" height="446" key="SwitcherDM" timestamp="1606707572158">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="414" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1606707572158" />
+    <state x="921" y="252" key="Vcs.Push.Dialog.v2" timestamp="1606456257519">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="921" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606456257519" />
     <state x="1031" y="223" width="596" height="594" key="find.popup" timestamp="1606445788670">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

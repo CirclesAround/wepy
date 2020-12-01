@@ -7,6 +7,9 @@
     <head></head>
     <button @tap="startRecord">{{isStart === 0 ? '点击开始录音' : isStart === 1 ? '正在录音' : isStart === 2 ? '暂停录音' : isStart === 3 ? '继续录音' : '录音完成'}}</button>
     <button @tap="playRecording" v-show="isStart === 4">播放录音</button>
+    <view class="body-view">
+      <slider @change="changeVolume" :value="sliderValue" show-value/>
+    </view>
   </view>
 
 </template>
@@ -23,11 +26,24 @@
         duration: 10000,
         frameSize: 50
       },
-      isRecordingPlay: false
+      isRecordingPlay: false,
+      recordingAddress: '', // 录音地址
+      musicUrl: '', // 线上的背景音乐地址下载到本地
+      setVolume: 0.2, // 设置背景音乐的音量
+      sliderValue: 20
     },
     methods: {
       startRecord () {
         let that = this
+        wx.downloadFile({
+          url: 'https://videoaudio-aliyun-abz.xy22.cn/upload/aiyin/music/2019/08/15/201908155d54d281ed8f2834576598_sourceMp3.mp3?OSSAccessKeyId=LTAIO1DZYoGf54uI&Expires=1606730485&Signature=V3kgYbVlboh7OtJhwp7xpV1pABI%3D',
+          success (res) {
+            // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+            if (res.statusCode === 200) {
+              that.musicUrl = res.tempFilePath
+            }
+          }
+        })
         if (that.isStart === 1) {
           that.recorderManager.pause()
         } else {
@@ -77,6 +93,44 @@
           this.isRecordingPlay = true
           this.innerAudioContext.play()
         }
+      },
+      // 合成音频
+      syntheticAudio () {
+        let testMediaContainer = wx.createMediaContainer()
+        testMediaContainer.extractDataSource({
+          source: this.recordingAddress, // 录音
+          success: recording => {
+            testMediaContainer.addTrack(recording.tracks[0])
+            console.log('成功解析第一个音频')
+            testMediaContainer.extractDataSource({
+              source: this.musicUrl, // 音乐
+              success: music => {
+                console.log('成功解析第二个音频')
+                testMediaContainer.addTrack(music.tracks[0])
+                music.tracks[0].volume = this.setVolume // 调整音频的音量
+                testMediaContainer.export({
+                  success: res => {
+                    console.log('合成音频成功')
+                    this.innerAudioContext.src = res.tempFilePath
+                    testMediaContainer.destroy()
+                  }
+                })
+              },
+              fail: err => {
+                console.log(err, '解析第二个失败')
+              }
+            })
+          },
+          fail: err => {
+            console.log(err, '解析第一个失败')
+          }
+        })
+      },
+      // 设置背景音乐音量
+      changeVolume (e) {
+        this.setVolume = e.$wx.detail.value / 100
+        this.sliderValue = this.setVolume * 100
+        this.syntheticAudio()
       }
     },
     onLoad () {
@@ -98,8 +152,8 @@
       // 监听录音结束事件
       this.recorderManager.onStop(res => {
         this.isStart = 4
-        console.log(res)
-        this.innerAudioContext.src = res.tempFilePath
+        this.recordingAddress = res.tempFilePath
+        this.syntheticAudio()
       })
 
       // 监听录音完成指定帧大小文件事件
