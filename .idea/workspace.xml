@@ -19,11 +19,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf85250f-0a4c-4804-975f-69106d6c0c60" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/packageA/subcontract.wpy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/mainPackage.wpy" afterDir="false" />
+    <list default="true" id="bf85250f-0a4c-4804-975f-69106d6c0c60" name="Default Changelist" comment="feat: 添加全">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.wpy" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.wpy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/eventHub.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/counter.wpy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/group.wpy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/groupitem.wpy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/list.wpy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/panel.wpy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/wepy-list.wpy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.wpy" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.wpy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wepy.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/wepy.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +136,21 @@
       <option name="project" value="LOCAL" />
       <updated>1606784175523</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: 分包使用">
+      <created>1606794853389</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1606794853389</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: 监听是否初始化完成">
+      <created>1606807972379</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1606807972379</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,33 +171,43 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: 添加公共部分和接口请求封装" />
     <MESSAGE value="feat: 音频合成dome" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 音频合成dome" />
+    <MESSAGE value="feat: 分包使用" />
+    <MESSAGE value="feat: 监听是否初始化完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 监听是否初始化完成" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="927" y="81" key="CommitChangelistDialog2" timestamp="1606784174093">
+    <state x="1013" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606808079372">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="927" y="81" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606784174093" />
-    <state x="368" y="85" key="DiffContextDialog" timestamp="1606784135651">
+    <state x="1013" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606808079372" />
+    <state x="177" y="132" key="CommitChangelistDialog2" timestamp="1606807971249">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="368" y="85" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606784135651" />
-    <state x="1073" y="271" key="FileChooserDialogImpl" timestamp="1606705464540">
+    <state x="177" y="132" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606807971249" />
+    <state x="368" y="85" width="1536" height="832" key="DiffContextDialog" timestamp="1606795138307">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1073" y="271" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1606705464540" />
+    <state x="368" y="85" width="1536" height="832" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606795138307" />
+    <state x="1073" y="271" key="FileChooserDialogImpl" timestamp="1606806734302">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1073" y="271" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1606806734302" />
+    <state width="828" height="303" key="Git.Branch.Popup" timestamp="1606795151631">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="828" height="303" key="Git.Branch.Popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606795151631" />
     <state width="414" height="446" key="SwitcherDM" timestamp="1606707572158">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="414" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1606707572158" />
-    <state x="921" y="252" key="Vcs.Push.Dialog.v2" timestamp="1606784178453">
+    <state x="921" y="252" key="Vcs.Push.Dialog.v2" timestamp="1606807974384">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="921" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606784178453" />
-    <state x="1031" y="223" width="596" height="594" key="find.popup" timestamp="1606445788670">
+    <state x="921" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1606807974384" />
+    <state x="1295" y="287" width="596" height="594" key="find.popup" timestamp="1606808532240">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1031" y="223" width="596" height="594" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606445788670" />
+    <state x="1295" y="287" width="596" height="594" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606808532240" />
     <state x="992" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1606785950625">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
