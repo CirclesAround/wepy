@@ -6,10 +6,18 @@ export default new Vuex.Store({
   state: {
     token: '', // 请求携带的凭证
     isGuest: false, // 是否为访客
-    version: '' // 小程序版本
+    version: '', // 小程序版本
+    imagesList: null // 图片地址对照表
   },
   getters: {
-
+    /*
+     * tips
+     * 只有初始化完成之后才可以调用接口
+     * 通过watch监听变化去加载页面数据
+     */
+    isReady (state) {
+      return !!(state.token && state.imagesList)
+    }
   },
   mutations: {
     setAuthorization (state, payload) {
