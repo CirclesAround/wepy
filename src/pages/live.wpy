@@ -1,0 +1,28 @@
+<style lang="less">
+  .test {
+    border: 1rpx solid red;
+  }
+</style>
+
+<template>
+  <view></view>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+  wepy.page({
+    // 选项
+    data: {
+      testData: []
+    },
+    methods: {
+
+    }
+  })
+</script>
+
+<config>
+  {
+    navigationBarTitleText: '直播'
+  }
+</config>

@@ -23,7 +23,7 @@
       innerAudioContext: '', // 创建音频
       isStart: 0, // 0没有开始录音，1开始录音，2暂停录音，3继续录音，4录音完成
       option: {
-        duration: 10000,
+        duration: 30000,
         frameSize: 50
       },
       isRecordingPlay: false,
@@ -36,7 +36,7 @@
       startRecord () {
         let that = this
         wx.downloadFile({
-          url: 'https://videoaudio-aliyun-abz.xy22.cn/upload/aiyin/music/2019/08/15/201908155d54d281ed8f2834576598_sourceMp3.mp3?OSSAccessKeyId=LTAIO1DZYoGf54uI&Expires=1606730485&Signature=V3kgYbVlboh7OtJhwp7xpV1pABI%3D',
+          url: 'https://img-qiniuyun-abzdev.xy22.cn/upload/music/library/audio/2021/02/02/202102026018cdb81b90e1612238263111.mp3',
           success (res) {
             // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
             if (res.statusCode === 200) {
@@ -71,6 +71,7 @@
                           wx.openSetting({ // 确定再次授权
                             success(res) {
                               console.log(res.authSetting)
+                              that.startRecord()
                             }
                           })
                         } else if (res.cancel) {
@@ -101,18 +102,21 @@
           source: this.recordingAddress, // 录音
           success: recording => {
             testMediaContainer.addTrack(recording.tracks[0])
-            console.log('成功解析第一个音频')
+            console.log(recording, '成功解析第一个音频')
+            recording.tracks[0].volume = 1 // 调整音频的音量
             testMediaContainer.extractDataSource({
               source: this.musicUrl, // 音乐
               success: music => {
-                console.log('成功解析第二个音频')
                 testMediaContainer.addTrack(music.tracks[0])
                 music.tracks[0].volume = this.setVolume // 调整音频的音量
+
                 testMediaContainer.export({
                   success: res => {
-                    console.log('合成音频成功')
+                    console.log(res, '合成音频成功')
                     this.innerAudioContext.src = res.tempFilePath
-                    testMediaContainer.destroy()
+                    // testMediaContainer.destroy()
+                    testMediaContainer.removeTrack(music.tracks[0])
+                    testMediaContainer.removeTrack(recording.tracks[0])
                   }
                 })
               },
@@ -133,6 +137,12 @@
         this.syntheticAudio()
       }
     },
+    onShow () {
+      // 页面处于高亮状态
+      wx.setKeepScreenOn({
+        keepScreenOn: true
+      })
+    },
     onLoad () {
       this.recorderManager = wx.getRecorderManager()
 
@@ -151,7 +161,9 @@
 
       // 监听录音结束事件
       this.recorderManager.onStop(res => {
+        console.log(res, '录音完成')
         this.isStart = 4
+        // this.innerAudioContext.src = res.tempFilePath
         this.recordingAddress = res.tempFilePath
         this.syntheticAudio()
       })

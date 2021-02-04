@@ -18,14 +18,20 @@ wepy.app({
 <config>
 {
     pages: [
-      'pages/mainPackage',
-      'pages/recording',
       'pages/test1',
+      'pages/recording',
+      'pages/mainPackage',
       'pages/test',
       'pages/test-component',
       'pages/test-image',
       'pages/index'
     ],
+    plugins: {
+      'live-player-plugin': {
+        'version': '1.2.7',
+        'provider': 'wx2b03c6e691cd7370'
+      }
+    },
     subPackages: [
       {
         root: 'packageA',
