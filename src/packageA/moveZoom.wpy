@@ -1,0 +1,336 @@
+<style lang="less">
+  .test {
+    width: 600rpx;
+    height: 600rpx;
+    margin: auto;
+  }
+
+  .myCanvas {
+    width: 300px;
+    height: 300px;
+  }
+</style>
+
+<template>
+  <view class="test">
+    <canvas
+      class="cropper"
+      disable-scroll="true"
+      :style="{width: width + 'rpx', height: height + 'rpx'}"
+      @touchstart="handleTouchStart"
+      @touchmove="handleTouchMove"
+      @touchend="handleTouchEnd"
+      @error="handleCanvasError"
+      canvas-id="cropper">
+    </canvas>
+  </view>
+  <canvas
+    class="cropper"
+    :style="{position: 'fixed', width: width * pixelRatio + 'px', height: height * pixelRatio + 'px', top: -width * pixelRatio + 'px', left: -height * pixelRatio + 'px'}"
+    disable-scroll="true"
+    canvas-id="targetCropper">
+  </canvas>
+  <swiper class="swipers">
+    <swiper-item class="item" v-for="(item, index) in imgobj" @tap="testClick(index)">
+      <view class="item_view">
+        <view class="item-img">
+          <image class="slide-image" src="{{item.thumb}}"></image>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+  <canvas class="myCanvas" canvas-id="myCanvas"></canvas>
+  <view class="btns">
+    <button class="btn" type="primary" size="mini" @tap="uploadTap">上传图片</button>
+    <button class="btn" type="default" size="mini" @tap="handleCancel">取消</button>
+    <button class="btn" type="primary" size="mini" @tap="getCropperImage">完成</button>
+    <button class="btn" type="default" size="mini" @tap="removeCropperImage">清除</button>
+  </view>
+</template>
+<script>
+  import wepy from '@wepy/core'
+  import WeCropper from 'we-cropper'
+  wepy.page({
+    data: {
+      $: null,
+      width: 0,
+      height: 0,
+      pixelRatio: 2,
+      imgSrc: '', // 确定使用的图片
+      backSrc: '', // 选择的背景图裁剪的
+      imgobj: [
+        {
+          thumb: 'https://img-qiniuyun-abzdev.xy22.cn/upload/e/2021/02/24/2021022460360b46a8bf0406132689.png?imageslim"',
+          filePath: 'https://img-qiniuyun-abzdev.xy22.cn/upload/e/2021/02/24/2021022460360b46a8bf0406132689.png?imageslim"'
+        },
+        {
+          thumb: 'http://sorce.lm720.com/upload/2021/01/26/20210126600f8caecfcc5278452891.png',
+          filePath: 'http://sorce.lm720.com/upload/2021/01/26/20210126600f8caecfcc5278452891.png'
+        },
+        {
+          thumb: 'http://sorce.lm720.com/upload/2021/01/26/20210126600f8ca19afe3772069858.png',
+          filePath: 'http://sorce.lm720.com/upload/2021/01/26/20210126600f8ca19afe3772069858.png'
+        },
+        {
+          thumb: 'http://sorce.lm720.com/upload/2021/01/26/20210126600f8c8363bed496257692.png',
+          filePath: 'http://sorce.lm720.com/upload/2021/01/26/20210126600f8c8363bed496257692.png'
+        },
+        {
+          thumb: 'http://sorce.lm720.com/upload/2021/01/26/20210126600f8c784af5a189649276.png',
+          filePath: 'http://sorce.lm720.com/upload/2021/01/26/20210126600f8c784af5a189649276.png'
+        }
+      ],
+      _choosenum: 0
+    },
+    methods: {
+      handleTouchStart (e) {
+        this.$.touchStart({
+          ...e.$wx,
+          touches: e.$wx.touches.map(item => {
+            return {
+              ...item,
+              x: item.clientX,
+              y: item.clientY
+            }
+          })
+        })
+      },
+
+      handleTouchMove (e) {
+        this.$.touchMove({
+          ...e.$wx,
+          touches: e.$wx.touches.map(item => {
+            return {
+              ...item,
+              x: item.clientX,
+              y: item.clientY
+            }
+          })
+        })
+      },
+
+      handleTouchEnd (e) {
+        this.$.touchEnd({
+          ...e.$wx,
+          touches: e.$wx.touches.map(item => {
+            return {
+              ...item,
+              x: item.clientX,
+              y: item.clientY
+            }
+          })
+        })
+      },
+
+      handleCanvasError (e) {
+        console.error(e)
+      },
+
+      pushOrigin (src) {
+        this.$.pushOrigin(src)
+      },
+
+      updateCanvas () {
+        this.$.updateCanvas()
+      },
+
+      uploadTap () {
+        let self = this
+
+        wx.chooseImage({
+          count: 1, // 默认9
+          sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+          sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+          success (res) {
+            const src = res.tempFilePaths[0]
+
+            self.$.pushOrign(src)
+          }
+        })
+      },
+
+      removeCropperImage () {
+        this.$.removeImage()
+      },
+
+      getCropperImage () {
+        this.$.getCropperImage()
+          .then(res => {
+            console.log(res)
+            // this.eventChannel.emit('getCropperImage', res)
+            // this.$back()
+            this.backSrc = res
+            this.drawOutline(this.ctx)
+          })
+      },
+
+      getCropperBase64 (fn) {
+        this.$.getCropperImage(fn)
+      },
+
+      handleCancel () {
+        this.$back()
+      },
+      drawOutline (ctx) {
+        ctx.fillStyle = 'red'
+        ctx.fillRect(0, 0, 300, 300)
+        this.drawCoverImage(ctx)
+      },
+      // 封面图
+      drawCoverImage (ctx) {
+        this.getHeadImgPath(this.backSrc).then(res => {
+          ctx.save()
+          ctx.drawImage(res.path, 0, 0, 300, 300)
+          ctx.restore()
+          this.drawTest(ctx)
+        })
+      },
+      drawTest (ctx) {
+        this.getHeadImgPath(this.imgobj[this._choosenum].thumb).then(res => {
+          ctx.save()
+          ctx.drawImage(res.path, 0, 0, 300, 300)
+          ctx.restore()
+          this.generatePoster(ctx)
+        })
+      },
+      generatePoster (ctx) {
+        ctx.draw(false, (res) => {
+          setTimeout(() => {
+            wx.canvasToTempFilePath({
+              canvasId: 'myCanvas',
+              success: res => {
+                this.imgSrc = res.tempFilePath
+                console.log(this.imgSrc)
+              }
+            }, this.$wx)
+          }, 400)
+        })
+      },
+      /**
+       * 线上图片需要处理
+       * @param imgSrc {String} 需要处理的图片地址
+       */
+      getHeadImgPath (imgSrc) {
+        return new Promise((resolve, fail) => {
+          wx.getImageInfo({
+            src: imgSrc,
+            success: res => {
+              resolve(res)
+            },
+            fail: res => {
+              clearTimeout(this.timer)
+              wx.hideLoading()
+              wx.showToast({
+                title: '图片加载错误',
+                icon: 'none',
+                duration: 3000
+              })
+              fail(res)
+            }
+          })
+        })
+      },
+      wxPromisify (t) {
+        return function() {
+          let test = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}
+          return new Promise(function(e, o) {
+            test.success = function(t) {
+              e(t)
+            }
+            test.fail = function(t) {
+              o(t)
+            }
+            t(test)
+          })
+        }
+      },
+      testClick (index) {
+        let that = this
+        // this.wxPromisify(wx.downloadFile)({
+        //   url: that.imgobj[index].thumb
+        // }).then((t) => {
+        //   that.imgobj[index].filePath = t.tempFilePath
+        //   that._choosenum = index
+        //   that.$.updateCanvas()
+        // }).catch(function(e) {
+        //   console.error('获取templateFile失败', e)
+        //   that._choosenum = index
+        //   that.$.updateCanvas()
+        // })
+        wx.downloadFile({
+          url: that.imgobj[index].thumb,
+          success: t => {
+            that.imgobj[index].filePath = t.tempFilePath
+            that._choosenum = index
+            that.$.updateCanvas()
+          }
+        })
+      }
+    },
+    onLoad (query) {
+      let that = this
+      // let ctx = this.ctx
+      this.ctx = wx.createCanvasContext('myCanvas', this.$wx)
+      let { windowWidth: width, windowHeight: height, pixelRatio } = wx.getSystemInfoSync()
+      // let { aspectRatio, filePath } = query
+      let filePath = 'https://img-qiniuyun-abzdev.xy22.cn/upload/p/2020/08/26/202008265f45cc28e316c568793909.jpg?imageslim'
+      that.width = 600
+      that.height = 600
+      that.pixelRatio = pixelRatio
+      that.eventChannel = that.$wx.getOpenerEventChannel()
+      let options = {
+        id: 'cropper',
+        targetId: 'targetCropper',
+        width,
+        height,
+        pixelRatio,
+        scale: 2.5,
+        zoom: 8,
+        src: filePath,
+        cut: {
+          width: this.width / 2,
+          height: this.width / 2
+        }
+      }
+
+      that.$ = new WeCropper(options)
+        .on('ready', function(e) {
+          console.log(e, '实例化后')
+        })
+      .on('beforeImageLoad', function(e) {
+        console.log(e, 'beforeImageLoad')
+      })
+      .on('beforeDraw', function(e) {
+        e.save()
+        let img = that.imgobj[that._choosenum].filePath
+        img && e.drawImage(img, 0, 0, that.width / 2, that.height / 2)
+        e.restore()
+      })
+      .on('imageLoad', function(e) {
+        console.log(e, 'imageLoad')
+      })
+
+      // that.wxPromisify(wx.downloadFile)({
+      //   url: 'https://img-qiniuyun-abzdev.xy22.cn/upload/e/2021/02/24/2021022460360b46a8bf0406132689.png?imageslim'
+      // }).then(t => {
+      //   that.imgobj[0].filePath = t.tempFilePath
+      //   that.$.updateCanvas()
+      // }).catch(function(e) {
+      //   console.error('获取templateFile失败', e)
+      // })
+
+      wx.downloadFile({
+        url: 'https://img-qiniuyun-abzdev.xy22.cn/upload/e/2021/02/24/2021022460360b46a8bf0406132689.png?imageslim',
+        success: t => {
+          that.imgobj[0].filePath = t.tempFilePath
+          that.$.updateCanvas()
+        }
+      })
+    }
+  })
+</script>
+<config>
+  {
+    navigationBarTitleText: '图片放大缩小'
+  }
+</config>

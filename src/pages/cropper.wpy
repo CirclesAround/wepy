@@ -1,0 +1,36 @@
+<style lang="less">
+  .test {
+    width: 600rpx;
+    height: 600rpx;
+    margin: auto;
+  }
+</style>
+
+<template>
+  <view>卡视角</view>
+</template>
+<script>
+  import wepy from '@wepy/core'
+  wepy.page({
+    data: {
+      $: null,
+      width: 0,
+      height: 0,
+      pixelRatio: 2
+    },
+    methods: {
+
+    },
+    onLoad (query) {
+
+    }
+  })
+</script>
+<config>
+  {
+    navigationBarTitleText: '图片放大缩小',
+    usingComponents: {
+
+    }
+  }
+</config>

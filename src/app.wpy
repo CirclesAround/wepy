@@ -18,6 +18,7 @@ wepy.app({
 <config>
 {
     pages: [
+      'pages/cropper',
       'pages/test1',
       'pages/recording',
       'pages/mainPackage',
@@ -37,7 +38,8 @@ wepy.app({
         root: 'packageA',
         name: 'testSubcontract',
         pages: [
-          'subcontract'
+          'subcontract',
+          'moveZoom'
         ]
       }
     ],
